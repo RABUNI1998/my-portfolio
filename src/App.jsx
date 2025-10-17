@@ -8,7 +8,7 @@ import Navbar from './components/Navbar.jsx';
 
 function App() {
   return (
-    <main className="bg-slate-900 text-white antialiased">
+    <main className="relative z-0 bg-primary text-white antialiased">
       <Navbar />
       <Hero />
       <Services />

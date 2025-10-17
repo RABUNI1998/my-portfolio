@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
-import {  AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 const navLinks = [
@@ -37,7 +38,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || isOpen ? 'bg-slate-900/90 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+        isScrolled || isOpen ? 'glass-effect shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -51,7 +52,7 @@ const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
-              className="relative text-slate-300 transition-colors hover:text-white"
+              className="group relative text-slate-300 transition-colors hover:text-white"
             >
               {link.title}
               <span className="absolute bottom-0 left-0 h-0.5 w-full scale-x-0 bg-blue-500 transition-transform duration-300 group-hover:scale-x-100"></span>
@@ -75,7 +76,7 @@ const Navbar = () => {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="flex flex-col items-center space-y-6 bg-slate-900/90 py-6 md:hidden"
+            className="flex flex-col items-center space-y-6 glass-effect py-6 md:hidden"
           >
             {navLinks.map((link) => (
               <motion.a

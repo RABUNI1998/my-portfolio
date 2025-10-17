@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { motion } from 'framer-motion';
 import ProjectCard from './ProjectCard.jsx';
+import { styles } from '../styles';
 
 // Import your project images from the assets folder
 import joedeeImage from '../assets/joedee-enterprise.png';
@@ -34,35 +35,40 @@ const projects = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-    },
-  },
-};
-
 const Work = () => {
   return (
-    <section id="work" className="min-h-screen bg-slate-900 py-24 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto text-center">
+    <section id="work" className={`${styles.padding} min-h-screen bg-gradient-to-b from-primary to-tertiary py-24`}>
+      <div className="container mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6 }}
-          className="mb-12 text-4xl font-extrabold text-white md:text-5xl"
+          className={`${styles.sectionHeadText} text-center mb-6`}
         >
           My Work
         </motion.h2>
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-center text-slate-300 max-w-3xl mx-auto mb-16 leading-relaxed"
+        >
+          Here are some of the projects I've worked on, showcasing my skills in web development, mobile development, and AI integration.
+        </motion.p>
         <motion.div
-          variants={containerVariants}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.3 },
+            },
+          }}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3"
+          viewport={{ once: true, amount: 0.1 }}
+          className="mt-20 flex flex-wrap gap-12 justify-center"
         >
           {projects.map((project) => (
             <ProjectCard key={project.title} {...project} />

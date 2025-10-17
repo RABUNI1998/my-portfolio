@@ -1,22 +1,33 @@
 /* eslint-disable no-unused-vars */
 import { motion } from 'framer-motion';
-import { SiFlutter, SiDart, SiReact, SiVite, SiNextdotjs, SiTailwindcss, SiNodedotjs, SiJavascript } from 'react-icons/si';
-import { FaDatabase, FaFileExcel } from 'react-icons/fa';
+import { SiFlutter, SiDart, SiReact, SiVite, SiNextdotjs, SiTailwindcss, SiNodedotjs, SiJavascript, SiFirebase, SiPostgresql } from 'react-icons/si';
+import { FaFileExcel } from 'react-icons/fa';
 import profileImage from '../assets/marfo-joseph.jpg';
-// TODO: Replace this with a real, high-quality image of yourself.
+
 const profileImageUrl = profileImage;
 
 const skills = [
-  { icon: <SiFlutter className="text-sky-400" />, name: 'Flutter' },
-  { icon: <SiDart className="text-sky-500" />, name: 'Dart' },
   { icon: <SiReact className="text-cyan-400" />, name: 'React' },
-  { icon: <SiVite className="text-purple-500" />, name: 'Vite' },
   { icon: <SiNextdotjs />, name: 'Next.js' },
-  { icon: <SiTailwindcss className="text-teal-400" />, name: 'Tailwind' },
+  { icon: <SiVite className="text-purple-500" />, name: 'Vite' },
+  { icon: <SiFlutter className="text-sky-400" />, name: 'Flutter' },
   { icon: <SiNodedotjs className="text-green-500" />, name: 'Node.js' },
-  { icon: <FaDatabase className="text-orange-400" />, name: 'Databases' },
+  { icon: <SiFirebase className="text-amber-400" />, name: 'Firebase' },
+  { icon: <SiPostgresql className="text-blue-400" />, name: 'PostgreSQL' },
+  { icon: <SiTailwindcss className="text-teal-400" />, name: 'Tailwind' },
   { icon: <FaFileExcel className="text-green-600" />, name: 'Excel/VBA' },
 ];
+
+const SkillCard = ({ icon, name }) => (
+  <motion.div
+    whileHover={{ scale: 1.1, y: -5, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+    className="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-slate-700/50 shadow-lg"
+  >
+    <div className="text-5xl text-white">{icon}</div>
+    <span className="text-slate-300 font-semibold">{name}</span>
+  </motion.div>
+);
 
 const About = () => {
   const sectionVariants = {
@@ -33,59 +44,61 @@ const About = () => {
   };
 
   const imageVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 0, scale: 0.8, rotate: -15 },
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.5, ease: 'easeOut' },
+      rotate: 0,
+      transition: { duration: 0.7, ease: 'easeOut' },
     },
   };
 
   return (
-    <section id="about" className="min-h-screen bg-slate-800 py-24 px-4 sm:px-6 lg:px-8">
+    <section id="about" className="min-h-screen py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary to-tertiary">
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="grid grid-cols-1 items-center gap-12 md:grid-cols-3"
+          className="grid grid-cols-1 items-center gap-16 md:grid-cols-3"
         >
-          {/* Image Column */}
           <motion.div variants={imageVariants} className="flex justify-center md:col-span-1">
-            <div className="relative h-64 w-64 rounded-full border-4 border-blue-500 p-2 shadow-lg lg:h-80 lg:w-80">
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-500 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
               <img
                 src={profileImageUrl}
                 alt="Joseph Marfo, CEO of RB-TECH"
-                className="h-full w-full rounded-full object-cover"
+                className="relative h-64 w-64 rounded-full object-cover border-4 border-slate-800 shadow-xl lg:h-80 lg:w-80"
               />
-              <div className="absolute inset-0 rounded-full border-4 border-purple-500 mix-blend-overlay"></div>
             </div>
           </motion.div>
 
-          {/* Text Content Column */}
           <motion.div variants={itemVariants} className="md:col-span-2">
             <h2 className="mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-4xl font-extrabold text-transparent md:text-5xl">
               The Mind Behind The Code
             </h2>
-            <p className="mb-6 text-lg text-slate-300">
+            <p className="mb-6 text-lg text-slate-300 leading-relaxed">
               Hi, I'm Joseph Marfo, the founder of RB-TECH. With a unique background in Mathematics Education and a minor in IT, I bring a structured, analytical, and user-focused approach to software development. My passion is not just building software, but solving problems and creating tools that empower businesses.
             </p>
-            <p className="text-lg text-slate-300">
+            <p className="text-lg text-slate-300 leading-relaxed">
               As the CEO of RB-TECH, my commitment is to deliver excellence and innovation in every project, ensuring your vision is brought to life with precision and creativity.
             </p>
-            <div className="mt-8">
-              <h3 className="mb-4 text-2xl font-bold text-white">Core Technologies</h3>
-              <div className="flex flex-wrap gap-4">
-                {skills.map((skill, index) => (
-                  <div key={index} className="flex items-center gap-2 rounded-md bg-slate-700/50 p-2 text-slate-300">
-                    {skill.icon}
-                    <span>{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </motion.div>
+        </motion.div>
+
+        <motion.div 
+          initial={{opacity: 0, y: 50}}
+          whileInView={{opacity: 1, y: 0}}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{duration: 0.8}}
+          className="mt-20">
+          <h3 className="mb-8 text-3xl font-bold text-white text-center">Core Technologies</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+            {skills.map((skill, index) => (
+              <SkillCard key={index} icon={skill.icon} name={skill.name} />
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
