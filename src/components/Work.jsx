@@ -18,8 +18,8 @@ const projects = [
     codeUrl: null, // Add your repo link here if public
   },
   {
-    title: 'The Farsight-Edu Consult',
-    description: 'A professional and responsive website for an educational consultancy firm, built to attract and inform clients with a clean and modern design.',
+    title: 'Church Website Template',
+    description: 'A modern and responsive website template for churches, designed to engage the congregation and provide essential information. Features include sermon archives, event calendars, and online giving.',
     imageUrl: tfecImage,
     techStack: ['HTML', 'CSS', 'JavaScript'],
     liveUrl: 'https://tfec.netlify.app/',
@@ -35,9 +35,30 @@ const projects = [
   },
 ];
 
+const GeometricBackground = () => (
+  <div className="absolute inset-0 -z-10 overflow-hidden">
+    <motion.div
+      className="absolute top-[20%] left-[20%] w-48 h-1 bg-purple-500 opacity-20"
+      animate={{ x: [-100, 100, -100] }}
+      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+    />
+    <motion.div
+      className="absolute bottom-[30%] right-[15%] w-1 h-32 bg-blue-500 opacity-20"
+      animate={{ y: [-100, 100, -100] }}
+      transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+    />
+    <motion.div
+      className="absolute top-[50%] left-[40%] w-24 h-24 border-2 border-green-500 opacity-10"
+      animate={{ rotate: [0, 360] }}
+      transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+    />
+  </div>
+);
+
 const Work = () => {
   return (
-    <section id="work" className={`${styles.padding} min-h-screen bg-gradient-to-b from-primary to-tertiary py-24`}>
+    <section id="work" className={`relative ${styles.padding} min-h-screen bg-gradient-to-b from-primary to-tertiary py-24`}>
+      <GeometricBackground />
       <div className="container mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}

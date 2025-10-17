@@ -21,12 +21,41 @@ const skills = [
 const SkillCard = ({ icon, name }) => (
   <motion.div
     whileHover={{ scale: 1.1, y: -5, rotate: 5 }}
+    whileTap={{ scale: 0.95, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
     className="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-slate-700/50 shadow-lg"
   >
     <div className="text-5xl text-white">{icon}</div>
     <span className="text-slate-300 font-semibold">{name}</span>
   </motion.div>
+);
+
+const FloatingShapes = () => (
+  <div className="absolute inset-0 -z-10 overflow-hidden">
+    <motion.div 
+      className="absolute top-[10%] left-[5%] w-32 h-32 bg-purple-500 rounded-full opacity-20 blur-2xl"
+      animate={{ 
+        y: [0, -20, 0, 20, 0],
+        x: [0, 10, 0, -10, 0],
+      }}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+    />
+    <motion.div 
+      className="absolute bottom-[20%] right-[10%] w-24 h-24 bg-blue-500 rounded-full opacity-20 blur-2xl"
+      animate={{ 
+        y: [0, 20, 0, -20, 0],
+        x: [0, -15, 0, 15, 0],
+      }}
+      transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+    />
+    <motion.div 
+      className="absolute top-[30%] right-[20%] w-16 h-16 bg-green-500 rounded-full opacity-10 blur-xl"
+      animate={{ 
+        rotate: [0, 360],
+      }}
+      transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+    />
+  </div>
 );
 
 const About = () => {
@@ -54,7 +83,8 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="min-h-screen py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary to-tertiary">
+    <section id="about" className="relative min-h-screen py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary to-tertiary">
+      <FloatingShapes />
       <div className="container mx-auto">
         <motion.div
           initial="hidden"

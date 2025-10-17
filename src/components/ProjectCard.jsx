@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLink, FaFileExcel } from 'react-icons/fa';
 import { SiReact, SiVite, SiTailwindcss, SiNetlify, SiHtml5, SiCss3, SiJavascript } from 'react-icons/si';
@@ -17,9 +18,24 @@ const techIconMap = {
 };
 
 const ProjectCard = ({ title, description, imageUrl, techStack, liveUrl, codeUrl }) => {
+  const [isRevealed, setIsRevealed] = useState(false);
+
+  const isTouchDevice = () => {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  };
+
+  const handleTap = () => {
+    if (isTouchDevice()) {
+      setIsRevealed(!isRevealed);
+    }
+  };
+
   return (
     <motion.div
-      whileHover="hover"
+      onHoverStart={() => !isTouchDevice() && setIsRevealed(true)}
+      onHoverEnd={() => !isTouchDevice() && setIsRevealed(false)}
+      onTap={handleTap}
+      animate={isRevealed ? "reveal" : "initial"}
       className="relative w-full sm:w-[360px] h-[480px] rounded-2xl overflow-hidden shadow-2xl"
       style={{ transformStyle: 'preserve-3d' }}
     >
@@ -39,7 +55,7 @@ const ProjectCard = ({ title, description, imageUrl, techStack, liveUrl, codeUrl
         className="absolute inset-0 p-6 flex flex-col justify-end"
         style={{ transform: 'translateZ(50px)' }}
       >
-        <motion.div initial={{ y: 20, opacity: 0 }} variants={{ hover: { y: 0, opacity: 1 } }} transition={{ delay: 0.1 }}>
+        <motion.div initial={{ y: 20, opacity: 0 }} variants={{ reveal: { y: 0, opacity: 1 } }} transition={{ delay: 0.1 }}>
           <h3 className="text-white font-bold text-2xl drop-shadow-lg">{title}</h3>
           <p className="mt-2 text-gray-200 text-sm drop-shadow-md">{description}</p>
         </motion.div>
@@ -52,7 +68,7 @@ const ProjectCard = ({ title, description, imageUrl, techStack, liveUrl, codeUrl
           ))}
         </div>
 
-        <motion.div initial={{ y: 20, opacity: 0 }} variants={{ hover: { y: 0, opacity: 1 } }} transition={{ delay: 0.2 }} className="mt-4 flex items-center space-x-4">
+        <motion.div initial={{ y: 20, opacity: 0 }} variants={{ reveal: { y: 0, opacity: 1 } }} transition={{ delay: 0.2 }} className="mt-4 flex items-center space-x-4">
           <a
             href={liveUrl}
             target="_blank"
@@ -73,7 +89,7 @@ const ProjectCard = ({ title, description, imageUrl, techStack, liveUrl, codeUrl
         className="absolute inset-0 border-2 border-purple-500 rounded-2xl pointer-events-none"
         style={{ transform: 'translateZ(80px)' }}
         initial={{ opacity: 0 }}
-        variants={{ hover: { opacity: 1 } }}
+        variants={{ reveal: { opacity: 1 } }}
         transition={{ duration: 0.4 }}
       />
     </motion.div>

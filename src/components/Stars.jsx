@@ -7,7 +7,7 @@ import * as random from "maath/random/dist/maath-random.esm";
 const Stars = (props) => {
   const ref = useRef();
   // Generate 5000 random star positions inside a sphere
-  const sphere = random.inSphere(new Float32Array(5000), { radius: 1.2 });
+  const sphere = random.inSphere(new Float32Array(5001), { radius: 1.2 });
 
   // Animate the stars rotation on each frame
   useFrame((state, delta) => {
