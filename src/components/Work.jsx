@@ -7,6 +7,7 @@ import { styles } from '../styles';
 import joedeeImage from '../assets/joedee-enterprise.png';
 import tfecImage from '../assets/tfec.png';
 import excelImage from '../assets/excel-sba.png';
+import megavImage from '../assets/mega.png';
 
 const projects = [
   {
@@ -25,6 +26,16 @@ const projects = [
     liveUrl: 'https://tfec.netlify.app/',
     codeUrl: null,
   },
+
+{
+    title: 'MegaVerse Agency',
+    description: 'A modern and responsive website template for MegaVerse Agency, designed to meet the agency\'s needs. Features include service showcases, portfolio sections, and contact forms.etc',
+    imageUrl: megavImage,
+    techStack: ['Next', 'Tailwind CSS', 'JavaScript'],
+    liveUrl: 'https://megaverseagency.netlify.app/',
+    codeUrl: null,
+  },
+
   {
     title: 'Excel School-Based Assessment System',
     description: 'An advanced Excel system designed to automate school-based assessment scoring and reporting, significantly reducing manual work for educators.',
