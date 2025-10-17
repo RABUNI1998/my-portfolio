@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import logo from '../assets/logo.jpg';
 
 const navLinks = [
   { title: 'Home', href: '#hero' },
@@ -42,8 +43,9 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#hero" className="text-2xl font-bold text-white">
-          RB-TECH
+        <a href="#hero" className="flex items-center gap-2">
+          <img src={logo} alt="RB-TECH Logo" className="h-9 w-9 object-contain rounded-full" />
+          <p className="text-white text-[18px] font-bold cursor-pointer">RB-TECH</p>
         </a>
 
         {/* Desktop Menu */}
