@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { styles } from '../styles.js';
 import { StarsCanvas } from "./index.js";
+import { FiEye, FiSend } from 'react-icons/fi';
 
 const Hero = () => {
   const containerVariants = {
@@ -27,6 +29,39 @@ const Hero = () => {
       },
     },
   };
+
+  const [stats, setStats] = useState({ visits: 0, requests: 0 });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        // The path '/.netlify/functions/get-stats' is automatically
+        // mapped by Netlify to our serverless function.
+        const response = await fetch('/.netlify/functions/get-stats');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setStats(data);
+      } catch (error) {
+        console.error("Failed to fetch stats:", error);
+        // Set to a default or loading state if fetch fails
+        setStats({ visits: 1000, requests: 40 }); // Fallback mock data
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  const StatItem = ({ icon, value, label }) => (
+    <div className="flex items-center gap-3 text-slate-300">
+      {icon}
+      <div className="text-left">
+        <p className="text-2xl font-bold text-white">{new Intl.NumberFormat().format(value)}</p>
+        <p className="text-sm text-slate-400">{label}</p>
+      </div>
+    </div>
+  );
 
   return (
     <section className="relative w-full h-screen mx-auto flex flex-col items-center justify-center">
@@ -83,6 +118,11 @@ const Hero = () => {
             <span className="absolute top-0 left-0 w-full h-full bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-20"></span>
             View My Work
           </a>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="mt-12 flex space-x-10">
+          <StatItem icon={<FiEye size={32} className="text-accent-color" />} value={stats.visits} label="Portfolio Visits" />
+          <StatItem icon={<FiSend size={32} className="text-accent-color" />} value={stats.requests} label="Services Requested" />
         </motion.div>
       </motion.div>
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaPaperPlane } from 'react-icons/fa';
 
@@ -43,6 +43,17 @@ const Contact = () => {
       }).then((res) => res.json());
 
       if (res.success) {
+        // --- Vercel Analytics Event Tracking ---
+        // This sends a custom event named 'Service Requested'
+        // You can view this in your Vercel Analytics dashboard.
+        if (window.va) {
+          window.va('track', 'Service Requested', {
+            name: formData.name,
+            email: formData.email,
+          });
+        }
+        // -----------------------------------------
+
         setStatus({ type: 'success', message: 'Message sent successfully! I will get back to you soon.' });
         setFormData({ name: '', email: '', message: '' });
       } else {
