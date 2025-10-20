@@ -64,7 +64,7 @@ const Hero = () => {
   );
 
   return (
-    <section className="relative w-full h-screen mx-auto flex flex-col items-center justify-center">
+    <section className="relative w-full h-screen mx-auto flex flex-col items-center justify-center mb-20">
       <motion.div
         variants={containerVariants}
         initial="hidden"
