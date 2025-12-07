@@ -2,14 +2,16 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.jpg';
 
 const navLinks = [
-  { title: 'Home', href: '#hero' },
-  { title: 'Services', href: '#services' },
-  { title: 'Work', href: '#work' },
-  { title: 'About', href: '#about' },
-  { title: 'Contact', href: '#contact' },
+  { title: 'Home', href: '/' },
+  { title: 'Services', href: '/#services' },
+  { title: 'Work', href: '/#work' },
+  { title: 'Apps', href: '/apps' },
+  { title: 'About', href: '/#about' },
+  { title: 'Contact', href: '/#contact' },
 ];
 
 const Navbar = () => {
@@ -42,23 +44,23 @@ const Navbar = () => {
         isScrolled || isOpen ? 'glass-effect shadow-lg' : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#hero" className="flex items-center gap-2">
+      <div className="max-w-7xl mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link to="/" className="flex items-center gap-2" onClick={() => window.scrollTo(0, 0)}>
           <img src={logo} alt="RB-TECH Logo" className="h-9 w-9 object-contain rounded-full" />
           <p className="text-white text-[18px] font-bold cursor-pointer">RB-TECH</p>
-        </a>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden space-x-8 md:flex">
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+            <Link
+              key={link.title}
+              to={link.href}
               className="group relative text-slate-300 transition-colors hover:text-white"
             >
               {link.title}
               <span className="absolute bottom-0 left-0 h-0.5 w-full scale-x-0 bg-blue-500 transition-transform duration-300 group-hover:scale-x-100"></span>
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -81,15 +83,15 @@ const Navbar = () => {
             className="flex flex-col items-center space-y-6 glass-effect py-6 md:hidden"
           >
             {navLinks.map((link) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
+              <motion.div
+                key={link.title}
                 onClick={() => setIsOpen(false)}
                 variants={mobileLinkVariants}
-                className="text-lg text-slate-300 hover:text-white"
               >
-                {link.title}
-              </motion.a>
+                <Link to={link.href} className="text-lg text-slate-300 hover:text-white">
+                  {link.title}
+                </Link>
+              </motion.div>
             ))}
           </motion.div>
         )}

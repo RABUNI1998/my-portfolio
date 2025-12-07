@@ -1,4 +1,13 @@
+# This file configures the build and development settings for Netlify.
+
 [build]
+  # This is the command Netlify will run to build your site.
   command = "npm run build"
+  # This is the directory that contains the built site.
   publish = "dist"
+  # This is the directory where your serverless functions are located.
   functions = "netlify/functions"
+
+[dev]
+  # This tells the Netlify dev server to use Vite.
+  framework = "vite"
